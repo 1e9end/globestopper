@@ -3,188 +3,536 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="icon" type="image/png" href="LOGO-TRANSPARENT.png">
-<title>Globe Stopper</title>
-
-
+  <meta name="description" content="GLOBE STOPPER international trading and export company product catalog." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;800&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="LOGO-TRANSPARENT.png" />
+  <title>GLOBE STOPPER | Product Catalog</title>
   <style>
+    :root {
+      --black: #080808;
+      --surface: #111111;
+      --panel: #181818;
+      --gold: #f6b93b;
+      --gold-light: #ffc857;
+      --orange: #f47a24;
+      --white: #f8f8f8;
+      --soft: #bebebe;
+      --muted: #858585;
+      --line: rgba(246, 185, 59, 0.2);
+      --radius: 14px;
+      --ease: cubic-bezier(0.77, 0, 0.175, 1);
+      --gold-gradient: linear-gradient(90deg, #ffd36a 0%, #f6b93b 38%, #f47a24 78%, #ff6a00 100%);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
-      padding: 0;
-      font-family: "Segoe UI", Arial, sans-serif;
-      background: #111111;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
+      color: var(--white);
+      font-family: "Montserrat", Arial, sans-serif;
+      background:
+        radial-gradient(circle at 50% 8%, rgba(246, 185, 59, 0.11), transparent 30%),
+        radial-gradient(circle at 85% 40%, rgba(244, 122, 36, 0.08), transparent 24%),
+        linear-gradient(180deg, #151515 0%, #080808 45%, #040404 100%);
     }
 
-    .card {
-      width: 100%;
-      max-width: 380px;
-      background: linear-gradient(180deg, #1c1c1c, #0e0e0e);
-      border-radius: 18px;
-      padding: 26px;
-      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.65);
-      text-align: center;
-      color: #ffffff;
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background-image: linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px);
+      background-size: 100% 6px;
+      opacity: 0.32;
     }
 
-    .logo-box {
-      width: 120px;
-      height: 120px;
-      margin: 0 auto 14px;
-      border-radius: 12px;
-      border: 2px dashed #f5c36a;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #f5c36a;
-      font-size: 12px;
-      letter-spacing: 1px;
+    a {
+      color: inherit;
     }
 
-    .logo-box img {
+    img {
+      display: block;
       max-width: 100%;
-      max-height: 100%;
-      border-radius: 10px;
+    }
+
+    .page {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 340px;
+      align-items: center;
+      gap: clamp(28px, 5vw, 74px);
+      padding: 48px 0;
+    }
+
+    .logo {
+      width: clamp(130px, 16vw, 210px);
+      margin-bottom: 34px;
+      filter: drop-shadow(0 22px 55px rgba(0, 0, 0, 0.65));
+    }
+
+    .eyebrow {
+      margin: 0 0 14px;
+      color: var(--soft);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
     }
 
     h1 {
-      margin: 10px 0 6px;
-      font-size: 22px;
-      font-weight: 600;
-      color: #f5c36a;
-      letter-spacing: 1px;
+      max-width: 800px;
+      margin: 0;
+      font-size: clamp(42px, 7vw, 92px);
+      font-weight: 800;
+      line-height: 0.94;
+      background: var(--gold-gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
     }
 
-    .subtitle {
-      font-size: 13px;
-      color: #bdbdbd;
-      margin-bottom: 20px;
-      line-height: 1.5;
+    .lead {
+      max-width: 660px;
+      margin: 24px 0 0;
+      color: var(--soft);
+      font-size: clamp(16px, 1.8vw, 22px);
+      line-height: 1.65;
     }
 
-    .link {
+    .hero-actions,
+    .catalog-actions,
+    .social-actions {
       display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .hero-actions {
+      margin-top: 34px;
+    }
+
+    .button {
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-      background: #f5c36a;
-      color: #111111;
+      min-height: 46px;
+      padding: 0 18px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      background: rgba(24, 24, 24, 0.82);
+      color: var(--soft);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
       text-decoration: none;
-      font-size: 15px;
-      font-weight: 500;
-      padding: 14px;
-      margin: 10px 0;
-      border-radius: 10px;
-      transition: all 0.25s ease;
+      text-transform: uppercase;
+      transition: transform 180ms var(--ease), border-color 180ms var(--ease), color 180ms var(--ease), background 180ms var(--ease);
     }
 
-    .link:hover {
-      background: #e2b155;
+    .button:hover {
       transform: translateY(-1px);
+      border-color: rgba(255, 200, 87, 0.5);
+      color: var(--gold-light);
+      background: rgba(29, 27, 27, 0.96);
     }
 
-    .link.dark {
-      background: transparent;
-      color: #f5c36a;
-      border: 1px solid #f5c36a;
-    }
-
-    .link.dark:hover {
-      background: #f5c36a;
+    .button.primary {
+      border-color: rgba(255, 200, 87, 0.54);
+      background: var(--gold-gradient);
       color: #111111;
     }
 
-    footer {
-      margin-top: 18px;
-      font-size: 11px;
-      color: #888888;
+    .contact-card {
+      padding: 22px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius);
+      background: rgba(17, 17, 17, 0.78);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.44);
+      backdrop-filter: blur(18px);
+    }
+
+    .contact-card h2 {
+      margin: 0 0 14px;
+      color: var(--gold-light);
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .contact-card p {
+      margin: 0 0 18px;
+      color: var(--soft);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .social-actions {
+      display: grid;
     }
 
     .wechat-box {
-  margin-top: 10px;
-  padding: 10px;
-  border: 1px dashed #f5c36a;
-  border-radius: 10px;
-  background: rgba(245, 195, 106, 0.05);
-  text-align: center;
-}
+      margin-top: 16px;
+      padding: 12px;
+      border: 1px dashed rgba(255, 200, 87, 0.42);
+      border-radius: 10px;
+      background: rgba(246, 185, 59, 0.055);
+      text-align: center;
+    }
 
-.wechat-box img {
-  width: 140px;
-  max-width: 100%;
-  border-radius: 8px;
-  margin-bottom: 6px;
-}
+    .wechat-box img {
+      width: 142px;
+      margin: 0 auto 8px;
+      border-radius: 8px;
+    }
 
-.wechat-box span {
-  display: block;
-  font-size: 12px;
-  color: #f5c36a;
-  letter-spacing: 0.5px;
-}
+    .wechat-box span {
+      display: block;
+      color: var(--gold-light);
+      font-size: 12px;
+      letter-spacing: 0.05em;
+    }
 
+    section {
+      padding: 72px 0;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      color: var(--gold-light);
+      font-size: clamp(28px, 4vw, 52px);
+      font-weight: 800;
+      line-height: 1.02;
+    }
+
+    .section-head p {
+      max-width: 520px;
+      margin: 0;
+      color: var(--soft);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .catalog-panel {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(260px, 0.45fr);
+      gap: 18px;
+      padding: 22px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.04), transparent 34%),
+        rgba(17, 17, 17, 0.84);
+    }
+
+    .catalog-copy h3 {
+      margin: 0 0 10px;
+      color: var(--white);
+      font-size: clamp(22px, 2.5vw, 34px);
+      font-weight: 700;
+    }
+
+    .catalog-copy p {
+      margin: 0 0 20px;
+      color: var(--soft);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .stat {
+      padding: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 10px;
+      background: rgba(0, 0, 0, 0.22);
+    }
+
+    .stat strong {
+      display: block;
+      color: var(--gold);
+      font-size: 24px;
+      font-weight: 800;
+    }
+
+    .stat span {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .filter-button {
+      min-height: 40px;
+      padding: 0 14px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      background: rgba(17, 17, 17, 0.76);
+      color: var(--soft);
+      cursor: pointer;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .filter-button.is-active {
+      border-color: rgba(255, 200, 87, 0.6);
+      color: #111111;
+      background: var(--gold-gradient);
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
+      gap: 16px;
+    }
+
+    .product-card {
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 12px;
+      background: rgba(24, 24, 24, 0.82);
+      transition: transform 180ms var(--ease), border-color 180ms var(--ease), box-shadow 180ms var(--ease);
+    }
+
+    .product-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(255, 200, 87, 0.34);
+      box-shadow: 0 20px 52px rgba(0, 0, 0, 0.32);
+    }
+
+    .image-stage {
+      display: grid;
+      place-items: center;
+      aspect-ratio: 1;
+      padding: 14px;
+      background: radial-gradient(circle at center, #282828 0%, #181818 58%, #101010 100%);
+    }
+
+    .image-stage img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 18px 28px rgba(0, 0, 0, 0.36));
+    }
+
+    .product-info {
+      padding: 13px;
+    }
+
+    .product-info span {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--muted);
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .product-info h3 {
+      margin: 0;
+      color: var(--gold);
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    footer {
+      padding: 34px 0 44px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 860px) {
+      .hero,
+      .catalog-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: auto;
+        padding-top: 32px;
+      }
+
+      .section-head {
+        display: grid;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .page {
+        width: min(100% - 24px, 1180px);
+      }
+
+      .hero-actions,
+      .catalog-actions {
+        display: grid;
+      }
+
+      .button,
+      .filter-button {
+        width: 100%;
+      }
+
+      .product-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .product-info h3 {
+        font-size: 12px;
+      }
+    }
   </style>
 </head>
 
 <body>
+  <main class="page">
+    <section class="hero" id="top">
+      <div>
+        <img class="logo" src="LOGO-TRANSPARENT.png" alt="GLOBE STOPPER logo" />
+        <p class="eyebrow">International Trading & Export Company</p>
+        <h1>GLOBE STOPPER</h1>
+        <p class="lead">Sourcing quality products from China for global buyers, importers, retailers, distributors, and procurement teams.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#catalog">View Product Images</a>
+        </div>
+      </div>
 
-  <div class="card">
+      <aside class="contact-card" aria-label="Contact GLOBE STOPPER">
+        <h2>Contact</h2>
+        <p>Use the links below to contact GLOBE STOPPER directly.</p>
+        <div class="social-actions">
+          <a class="button primary" href="https://wa.me/8617307600601" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+          <a class="button" href="https://mail.google.com/mail/?view=cm&to=globestopper.co@gmail.com" target="_blank" rel="noopener noreferrer">Email Us</a>
+          <a class="button" href="tel:+8617307600601">Call Us</a>
+          <a class="button" href="https://www.instagram.com/globe.stopper/" target="_blank" rel="noopener noreferrer">Instagram</a>
+          <a class="button" href="https://www.facebook.com/profile.php?id=61586152064819" target="_blank" rel="noopener noreferrer">Facebook</a>
+        </div>
+        <div class="wechat-box">
+          <img src="wechat-qr.jpg" alt="WeChat QR Code" />
+          <span>WeChat ID: 17307600601</span>
+        </div>
+      </aside>
+    </section>
 
-    <div class="logo-box">
-      <img src="LOGO-TRANSPARENT.png" alt="Globe Stopper Logo">
-    </div>
-    <h1> GLOBE STOPPER</h1>
-    <div class="subtitle">
-      International trading & export company<br>
-      Sourcing quality products from China for global markets
-    </div>
+    <section id="catalog" aria-labelledby="catalog-title">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Image Catalog</p>
+          <h2 id="catalog-title">Inserted Product Images</h2>
+        </div>
+        <p>Products are grouped from the image folders you added: cars, electronics, and kitchen products.</p>
+      </div>
 
-    <a class="link"
-       href="https://www.instagram.com/globe.stopper/"
-       target="_blank"
-       rel="noopener noreferrer">
-      Instagram
-    </a>
+      <div class="filters" aria-label="Catalog filters">
+        <button class="filter-button is-active" type="button" data-filter="all">All</button>
+        <button class="filter-button" type="button" data-filter="cars">Cars</button>
+        <button class="filter-button" type="button" data-filter="electronics">Electronics</button>
+        <button class="filter-button" type="button" data-filter="kitchen">Kitchen</button>
+      </div>
 
-    <a class="link"
-       href="https://www.facebook.com/profile.php?id=61586152064819"
-       target="_blank"
-       rel="noopener noreferrer">
-      Facebook
-    </a>
-    <a class="link"
-   href="https://mail.google.com/mail/?view=cm&to=globestopper.co@gmail.com"
-   target="_blank"
-   rel="noopener noreferrer">
-  Email Us
-</a>
+      <div class="product-grid" id="productGrid">
+        <article class="product-card" data-category="cars"><div class="image-stage"><img src="catalog-images/CARS/-.png" alt="Automotive accessory" loading="lazy" /></div><div class="product-info"><span>Cars</span><h3>Automotive Accessory</h3></div></article>
+        <article class="product-card" data-category="cars"><div class="image-stage"><img src="catalog-images/CARS/CAR-CHARGER-RADIO.png" alt="Car charger radio" loading="lazy" /></div><div class="product-info"><span>Cars</span><h3>Car Charger Radio</h3></div></article>
+        <article class="product-card" data-category="cars"><div class="image-stage"><img src="catalog-images/CARS/CAR-LIGHT.png" alt="Car light" loading="lazy" /></div><div class="product-info"><span>Cars</span><h3>Car Light</h3></div></article>
+        <article class="product-card" data-category="cars"><div class="image-stage"><img src="catalog-images/CARS/CAR-PHONESTANDER.png" alt="Car phone stand" loading="lazy" /></div><div class="product-info"><span>Cars</span><h3>Car Phone Stand</h3></div></article>
+        <article class="product-card" data-category="cars"><div class="image-stage"><img src="catalog-images/CARS/NUMBER-STAND.png" alt="Number stand" loading="lazy" /></div><div class="product-info"><span>Cars</span><h3>Number Stand</h3></div></article>
+        <article class="product-card" data-category="cars"><div class="image-stage"><img src="catalog-images/CARS/NUMBERR-STAND.png" alt="Premium number stand" loading="lazy" /></div><div class="product-info"><span>Cars</span><h3>Premium Number Stand</h3></div></article>
 
+        <article class="product-card" data-category="electronics"><div class="image-stage"><img src="catalog-images/ELECTRONICS/ADAPTER.png" alt="Power adapter" loading="lazy" /></div><div class="product-info"><span>Electronics</span><h3>Power Adapter</h3></div></article>
+        <article class="product-card" data-category="electronics"><div class="image-stage"><img src="catalog-images/ELECTRONICS/AIR-PUMPER.png" alt="Air pumper" loading="lazy" /></div><div class="product-info"><span>Electronics</span><h3>Air Pumper</h3></div></article>
+        <article class="product-card" data-category="electronics"><div class="image-stage"><img src="catalog-images/ELECTRONICS/AIRPUMP.png" alt="Air pump" loading="lazy" /></div><div class="product-info"><span>Electronics</span><h3>Air Pump</h3></div></article>
+        <article class="product-card" data-category="electronics"><div class="image-stage"><img src="catalog-images/ELECTRONICS/FAN.png" alt="Portable fan" loading="lazy" /></div><div class="product-info"><span>Electronics</span><h3>Portable Fan</h3></div></article>
+        <article class="product-card" data-category="electronics"><div class="image-stage"><img src="catalog-images/ELECTRONICS/FANN.png" alt="Mini fan" loading="lazy" /></div><div class="product-info"><span>Electronics</span><h3>Mini Fan</h3></div></article>
+        <article class="product-card" data-category="electronics"><div class="image-stage"><img src="catalog-images/ELECTRONICS/FANS.png" alt="Cooling fan" loading="lazy" /></div><div class="product-info"><span>Electronics</span><h3>Cooling Fan</h3></div></article>
+        <article class="product-card" data-category="electronics"><div class="image-stage"><img src="catalog-images/ELECTRONICS/FFAN.png" alt="Compact fan" loading="lazy" /></div><div class="product-info"><span>Electronics</span><h3>Compact Fan</h3></div></article>
+        <article class="product-card" data-category="electronics"><div class="image-stage"><img src="catalog-images/ELECTRONICS/MINI-AC.png" alt="Mini AC" loading="lazy" /></div><div class="product-info"><span>Electronics</span><h3>Mini AC</h3></div></article>
+        <article class="product-card" data-category="electronics"><div class="image-stage"><img src="catalog-images/ELECTRONICS/POWERBANK-1.png" alt="Compact power bank" loading="lazy" /></div><div class="product-info"><span>Electronics</span><h3>Compact Power Bank</h3></div></article>
+        <article class="product-card" data-category="electronics"><div class="image-stage"><img src="catalog-images/ELECTRONICS/POWERBANK.png" alt="Power bank" loading="lazy" /></div><div class="product-info"><span>Electronics</span><h3>Power Bank</h3></div></article>
+        <article class="product-card" data-category="electronics"><div class="image-stage"><img src="catalog-images/ELECTRONICS/TENDA-AC.png" alt="Tenda AC router" loading="lazy" /></div><div class="product-info"><span>Electronics</span><h3>Tenda AC Router</h3></div></article>
+        <article class="product-card" data-category="electronics"><div class="image-stage"><img src="catalog-images/ELECTRONICS/TENDA.png" alt="Tenda router" loading="lazy" /></div><div class="product-info"><span>Electronics</span><h3>Tenda Router</h3></div></article>
+        <article class="product-card" data-category="electronics"><div class="image-stage"><img src="catalog-images/ELECTRONICS/TENDAA.png" alt="Tenda network device" loading="lazy" /></div><div class="product-info"><span>Electronics</span><h3>Tenda Network Device</h3></div></article>
 
-    <a class="link" href="tel:+8617307600601">
-      Call Us
-    </a>
+        <article class="product-card" data-category="kitchen"><div class="image-stage"><img src="catalog-images/KITCHEN/AIR-FRYER.png" alt="Air fryer" loading="lazy" /></div><div class="product-info"><span>Kitchen</span><h3>Air Fryer</h3></div></article>
+        <article class="product-card" data-category="kitchen"><div class="image-stage"><img src="catalog-images/KITCHEN/AIRFRYER.png" alt="Kitchen air fryer" loading="lazy" /></div><div class="product-info"><span>Kitchen</span><h3>Kitchen Air Fryer</h3></div></article>
+        <article class="product-card" data-category="kitchen"><div class="image-stage"><img src="catalog-images/KITCHEN/COLLECTION.png" alt="Kitchen collection" loading="lazy" /></div><div class="product-info"><span>Kitchen</span><h3>Kitchen Collection</h3></div></article>
+        <article class="product-card" data-category="kitchen"><div class="image-stage"><img src="catalog-images/KITCHEN/COOKWARE-1.png" alt="Cookware set" loading="lazy" /></div><div class="product-info"><span>Kitchen</span><h3>Cookware Set</h3></div></article>
+        <article class="product-card" data-category="kitchen"><div class="image-stage"><img src="catalog-images/KITCHEN/COOKWARE-2.png" alt="Premium cookware set" loading="lazy" /></div><div class="product-info"><span>Kitchen</span><h3>Premium Cookware Set</h3></div></article>
+        <article class="product-card" data-category="kitchen"><div class="image-stage"><img src="catalog-images/KITCHEN/COOKWARE.png" alt="Cookware" loading="lazy" /></div><div class="product-info"><span>Kitchen</span><h3>Cookware</h3></div></article>
+        <article class="product-card" data-category="kitchen"><div class="image-stage"><img src="catalog-images/KITCHEN/GARLIC-SQUEEZER.png" alt="Garlic squeezer" loading="lazy" /></div><div class="product-info"><span>Kitchen</span><h3>Garlic Squeezer</h3></div></article>
+        <article class="product-card" data-category="kitchen"><div class="image-stage"><img src="catalog-images/KITCHEN/WOOD-SPONES.png" alt="Wood spoons" loading="lazy" /></div><div class="product-info"><span>Kitchen</span><h3>Wood Spoons</h3></div></article>
+        <article class="product-card" data-category="kitchen"><div class="image-stage"><img src="catalog-images/KITCHEN/WOODEN-SPONES.png" alt="Wooden spoons" loading="lazy" /></div><div class="product-info"><span>Kitchen</span><h3>Wooden Spoons</h3></div></article>
+      </div>
+    </section>
+  </main>
 
-    <a class="link"
-       href="https://wa.me/8617307600601"
-       target="_blank"
-       rel="noopener noreferrer">
-      WhatsApp
-    </a>
+  <footer>
+    Reliable sourcing • Quality control • Worldwide shipping
+  </footer>
 
-      <div class="wechat-box">
-  <img src="wechat-qr.jpg" alt="WeChat QR Code">
-  <span>WeChat ID: 17307600601</span>
-</div>
+  <script>
+    const filterButtons = document.querySelectorAll(".filter-button");
+    const cards = document.querySelectorAll(".product-card");
 
+    filterButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const filter = button.dataset.filter;
 
-
-    <footer>
-      Reliable sourcing • Quality control • Worldwide shipping
-    </footer>
-
-  </div>
-
+        filterButtons.forEach((item) => item.classList.toggle("is-active", item === button));
+        cards.forEach((card) => {
+          card.hidden = filter !== "all" && card.dataset.category !== filter;
+        });
+      });
+    });
+  </script>
 </body>
 </html>
