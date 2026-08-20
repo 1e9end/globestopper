@@ -351,6 +351,7 @@
     .image-stage img {
       width: 100%;
       height: 100%;
+      cursor: zoom-in;
       object-fit: contain;
       filter: drop-shadow(0 18px 28px rgba(0, 0, 0, 0.36));
     }
@@ -375,6 +376,72 @@
       font-size: 14px;
       font-weight: 700;
       line-height: 1.35;
+    }
+
+    .image-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 30;
+      display: grid;
+      place-items: center;
+      padding: 28px;
+      background: rgba(3, 3, 3, 0.9);
+      opacity: 0;
+      pointer-events: none;
+      visibility: hidden;
+      transition: opacity 180ms var(--ease), visibility 180ms var(--ease);
+    }
+
+    .image-modal.is-open {
+      opacity: 1;
+      pointer-events: auto;
+      visibility: visible;
+    }
+
+    .modal-frame {
+      display: grid;
+      gap: 14px;
+      width: min(100%, 1120px);
+    }
+
+    .modal-close {
+      justify-self: end;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 999px;
+      padding: 10px 16px;
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.08);
+      cursor: pointer;
+      font: inherit;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .modal-close:hover {
+      border-color: rgba(255, 200, 87, 0.55);
+      color: var(--gold);
+    }
+
+    .image-modal img {
+      width: 100%;
+      max-height: 78vh;
+      object-fit: contain;
+      border-radius: 12px;
+      background: #111111;
+      box-shadow: 0 32px 90px rgba(0, 0, 0, 0.55);
+    }
+
+    .modal-caption {
+      margin: 0;
+      color: var(--gold);
+      font-size: 16px;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    body.modal-open {
+      overflow: hidden;
     }
 
     footer {
@@ -472,9 +539,8 @@
       <div class="section-head">
         <div>
           <p class="eyebrow">Image Catalog</p>
-          <h2 id="catalog-title">Inserted Product Images</h2>
+          <h2 id="catalog-title">Product Catalog</h2>
         </div>
-        <p>Products are grouped from the image folders you added: cars, electronics, and kitchen products.</p>
       </div>
 
       <div class="filters" aria-label="Catalog filters">
@@ -523,9 +589,21 @@
     Reliable sourcing • Quality control • Worldwide shipping
   </footer>
 
+  <div class="image-modal" id="imageModal" aria-hidden="true" role="dialog" aria-label="Product image viewer">
+    <div class="modal-frame">
+      <button class="modal-close" type="button" id="modalClose">Close</button>
+      <img id="modalImage" src="" alt="" />
+      <p class="modal-caption" id="modalCaption"></p>
+    </div>
+  </div>
+
   <script>
     const filterButtons = document.querySelectorAll(".filter-button");
     const cards = document.querySelectorAll(".product-card");
+    const modal = document.getElementById("imageModal");
+    const modalImage = document.getElementById("modalImage");
+    const modalCaption = document.getElementById("modalCaption");
+    const modalClose = document.getElementById("modalClose");
 
     filterButtons.forEach((button) => {
       button.addEventListener("click", () => {
@@ -536,6 +614,59 @@
           card.hidden = filter !== "all" && card.dataset.category !== filter;
         });
       });
+    });
+
+    const closeImageModal = () => {
+      modal.classList.remove("is-open");
+      modal.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("modal-open");
+      modalImage.removeAttribute("src");
+      modalImage.removeAttribute("alt");
+      modalCaption.textContent = "";
+    };
+
+    const openImageModal = (image) => {
+      const card = image.closest(".product-card");
+      const title = card?.querySelector("h3")?.textContent || image.alt || "Product image";
+
+      modalImage.src = image.currentSrc || image.src;
+      modalImage.alt = image.alt || title;
+      modalCaption.textContent = title;
+      modal.classList.add("is-open");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.classList.add("modal-open");
+      modalClose.focus();
+    };
+
+    cards.forEach((card) => {
+      const image = card.querySelector(".image-stage img");
+
+      if (!image) {
+        return;
+      }
+
+      image.setAttribute("tabindex", "0");
+      image.setAttribute("role", "button");
+      image.setAttribute("aria-label", `Open ${image.alt || "product image"}`);
+      image.addEventListener("click", () => openImageModal(image));
+      image.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          openImageModal(image);
+        }
+      });
+    });
+
+    modalClose.addEventListener("click", closeImageModal);
+    modal.addEventListener("click", (event) => {
+      if (event.target === modal) {
+        closeImageModal();
+      }
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && modal.classList.contains("is-open")) {
+        closeImageModal();
+      }
     });
   </script>
 </body>
